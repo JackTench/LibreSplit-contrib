@@ -3,6 +3,7 @@
  * Implementation of the timer
  */
 #include "timer.h"
+#include "gui/dialogs.h"
 #include "settings/utils.h"
 
 #include "lasr/auto-splitter.h"
@@ -934,6 +935,17 @@ void ls_timer_stop(ls_timer* timer)
 
 int ls_timer_reset(ls_timer* timer)
 {
+    // Ask for confirmation if run has a gold split.
+    if (ls_timer_has_gold_split(timer)) {
+        bool user_reset = display_confirm_reset_dialog();
+        if (user_reset) {
+            reset_timer(timer);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     if (!timer->running) {
         if (timer->started && timer->time <= 0) {
             return ls_timer_cancel(timer);
