@@ -9,6 +9,7 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 #include <stdatomic.h>
+#include <stdbool.h>
 
 /**
  * Opens the default browser on the LibreSplit troubleshooting documentation.
@@ -56,7 +57,7 @@ gboolean display_non_capable_mem_read_dialog(gpointer data)
     return FALSE; // False removes this function from the queue
 }
 
-gboolean display_confirm_reset_dialog()
+bool display_confirm_reset_dialog()
 {
     GtkWidget* dialog = gtk_message_dialog_new(
         NULL,
@@ -69,5 +70,5 @@ gboolean display_confirm_reset_dialog()
 
     gint response = gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
-    return (response == GTK_RESPONSE_YES);
+    return response == GTK_RESPONSE_YES;
 }
