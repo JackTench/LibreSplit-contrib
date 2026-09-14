@@ -1,7 +1,7 @@
 project(
     'libresplit',
     'c',
-    version: 'pre-release',
+    version: '0.1.0',
     default_options: ['c_std=gnu17'],
     meson_version: '>=1.1',
 )
